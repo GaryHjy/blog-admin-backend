@@ -8,13 +8,8 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import databaseConfig from './config/database.config';
 
-// const entitiesPath =
-//   process.env.NODE_ENV === 'production'
-//     ? path.resolve('./**/*.entity.js')
-//     : path.resolve('./**/*.entity.ts');
-
-
-const entitiesPath = path.resolve(__dirname + '/*/entities/*.entity{.ts,.js}')
+// 实体类路径
+const entitiesPath = path.resolve(__dirname + '/*/**/*.entity{.ts,.js}')
 
 @Module({
   imports: [

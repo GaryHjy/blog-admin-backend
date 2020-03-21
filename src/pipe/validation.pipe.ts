@@ -12,8 +12,7 @@ export class ValidationPipe implements PipeTransform<any> {
     const errors = await validate(object);
     if (errors.length > 0) {
       // 获取第一条数据错误
-      const firstError = errors[0].constraints
-      const errorText = firstError[Object.keys(firstError)[0]]
+      const errorText = Object.values(errors[0].constraints)[0]
       // 统一处理返回格式
       throw new HttpException(
         { 

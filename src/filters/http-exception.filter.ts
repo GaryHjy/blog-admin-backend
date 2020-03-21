@@ -21,8 +21,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
     // 获取错误信息
     const responseInfo = exception.message
     const error = responseInfo.errors
-    const code = responseInfo.code || 1
-    const message = responseInfo.message || '请求失败'
+    const code = responseInfo.code || status || 1
+    const message = responseInfo.message || responseInfo || '请求失败'
 
     // 错误字段
     Logger.log(message, '错误提示');

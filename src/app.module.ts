@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import databaseConfig from './config/database.config';
+import { AuthGuard } from './guard/auth.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 // 实体类路径
 const entitiesPath = path.resolve(__dirname + '/*/**/*.entity{.ts,.js}')
@@ -36,6 +38,9 @@ const entitiesPath = path.resolve(__dirname + '/*/**/*.entity{.ts,.js}')
     AuthModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, {
+    provide: APP_GUARD,
+    useClass: AuthGuard
+  }],
 })
 export class AppModule {}

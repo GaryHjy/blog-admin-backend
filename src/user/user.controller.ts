@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, HttpException, HttpStatus } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { LoginUserDto, CreateUserDto } from './dto/user.dto';
@@ -13,22 +13,26 @@ export class UserController {
   @ApiOperation({ summary: '用户列表'})
   findAll() {
     return this.userService.findAll()
-    // return [
-    //   {
-    //     id: 1,
-    //     name: '小明'
-    //   },
-    //   {
-    //     id: 2,
-    //     name: '小红'
-    //   }
-    // ]
   }
 
   @Post()
+  @ApiOperation({ summary: '用户创建'})
   async create(@Body() body: CreateUserDto) {
-    const res = await this.userService.create(body)
-    return res
+    const user = await this.userService.findOne({
+      where: {
+        username: body.username
+      }
+    })
+    if (user) {
+      throw new HttpException(
+        {
+          message: '用户名已存在',
+          code: 400
+        },
+        HttpStatus.OK,
+      )
+    }
+    return await this.userService.create(body)
   }
 
   @Post('login')

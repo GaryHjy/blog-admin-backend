@@ -5,8 +5,15 @@ import { ValidationPipe } from './pipe/validation.pipe';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { TransformInterceptor } from './interceptors/transform/transform.interceptor';
 
+const PORT = process.env.PORT || 3000;
+const PREFIX = process.env.PREFIX || '/'
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // 设置请求prefix
+  app.setGlobalPrefix(PREFIX);
+  
   // 配置swagger
   const options = new DocumentBuilder()
     .setTitle('博客后台接口文档')
@@ -22,6 +29,6 @@ async function bootstrap() {
   app.useGlobalInterceptors(new TransformInterceptor());
   // 全局校验管道(字段校验)
   app.useGlobalPipes(new ValidationPipe());
-  await app.listen(3000);
+  await app.listen(PORT);
 }
 bootstrap();

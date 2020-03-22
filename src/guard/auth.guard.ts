@@ -1,4 +1,4 @@
-import { Injectable, CanActivate, ExecutionContext, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, CanActivate, ExecutionContext, HttpException, HttpStatus, Logger } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
 import { ConfigService } from '@nestjs/config';
 
@@ -21,6 +21,8 @@ export class AuthGuard implements CanActivate {
     const token = authorization && authorization.substring(7) // 截取Bearer之后的token
     const whiteUrl = this.configService.get('global.whiteUrl')
     
+    Logger.log(`当前的token: ${token}`, 'AuthGuard');
+
     // 绕过白名单
     if(whiteUrl.find(url => request.url.indexOf(url) >= 0)) {
       return true

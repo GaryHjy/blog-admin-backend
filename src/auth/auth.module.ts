@@ -17,7 +17,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       imports: [ConfigModule],
       useFactory: async (config: ConfigService): Promise<object> => ({
         secret: config.get('global.secret'), // token加盐
-        expiresIn: config.get('global.expiresIn') // token有效期
+        signOptions: {
+          expiresIn: config.get('global.expiresIn') // token有效期
+        }
       }),
       inject: [ConfigService]
     })

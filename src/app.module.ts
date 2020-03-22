@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import databaseConfig from './config/database.config';
+import globalConfig from './config/global.config';
 import { AuthGuard } from './guard/auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 
@@ -17,7 +18,7 @@ const entitiesPath = path.resolve(__dirname + '/*/**/*.entity{.ts,.js}')
   imports: [
     // 配置加载配置文件
     ConfigModule.forRoot({
-      load: [databaseConfig] // 引入配置文件
+      load: [databaseConfig, globalConfig] // 引入配置文件
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule], // 要import, 不然会报错

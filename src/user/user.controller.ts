@@ -1,16 +1,17 @@
 import { Controller, Get, Post, Body, Param, HttpException, HttpStatus } from '@nestjs/common';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { LoginUserDto, CreateUserDto } from './dto/user.dto';
 
 @Controller('user')
 @ApiTags('用户')
+@ApiBearerAuth()
 export class UserController {
 
   constructor( private readonly userService: UserService ) {}
 
   @Get()
-  @ApiOperation({ summary: '用户列表'})
+  @ApiOperation({ summary: '用户列表', description: '获取用户列表'})
   findAll() {
     return this.userService.findAll()
   }
@@ -37,7 +38,6 @@ export class UserController {
 
   @Post('login')
   @ApiOperation({ summary: '用户登录' })
-  //  @Query() query, @Param() params
   login(@Body() body: LoginUserDto) {
     console.log(body)
     return {

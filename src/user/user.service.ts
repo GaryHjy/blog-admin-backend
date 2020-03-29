@@ -23,8 +23,8 @@ export class UserService {
     if (res.length) {
       return false
     } else {
-      await this.UserRepository.insert(data)
-      return true
+      const user = await this.UserRepository.create(data)
+      return await this.UserRepository.save(user);
     }
   }
 

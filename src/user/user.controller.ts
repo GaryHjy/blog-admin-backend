@@ -39,7 +39,6 @@ export class UserController {
   @Post('login')
   @ApiOperation({ summary: '用户登录' })
   login(@Body() body: LoginUserDto) {
-    console.log(body)
     return {
       code: 200,
       msg: 'success',

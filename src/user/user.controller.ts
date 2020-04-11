@@ -1,52 +1,37 @@
-import { Controller, Get, Post, Body, Param, HttpException, HttpStatus } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
 import { UserService } from './user.service';
-import { LoginUserDto, CreateUserDto } from './dto/user.dto';
+import { CreateUserDto } from './dto/user.dto';
+import { UserLoginDto } from './dto/user.login.dto';
+import { UserRep } from './dto/user.rep.dto';
 
 @Controller('user')
 @ApiTags('用户')
 @ApiBearerAuth()
 export class UserController {
 
-  constructor( private readonly userService: UserService ) {}
+  constructor(
+    private readonly userService: UserService,
+  ) {}
 
   @Get()
   @ApiOperation({ summary: '用户列表', description: '获取用户列表'})
   findAll() {
-    return this.userService.findAll()
+    return this.userService.findAll();
   }
 
   @Post()
   @ApiOperation({ summary: '用户创建'})
-  async create(@Body() body: CreateUserDto) {
-    const user = await this.userService.findOne({
-      where: {
-        username: body.username
-      }
-    })
-    if (user) {
-      throw new HttpException(
-        {
-          message: '用户名已存在',
-          code: 400
-        },
-        HttpStatus.OK,
-      )
-    }
-    return await this.userService.create(body)
+  @ApiOkResponse({ type: UserRep })
+  async create(@Body() createUserDto: CreateUserDto): Promise<UserRep> {
+    return await this.userService.create(createUserDto);
   }
 
   @Post('login')
   @ApiOperation({ summary: '用户登录' })
-  login(@Body() body: LoginUserDto) {
-    return {
-      code: 200,
-      msg: 'success',
-      data: {
-        id: "1",
-        ...body
-      }
-    }
+  @ApiOkResponse({ type: UserRep })
+  async login(@Body() loginUserDto: UserLoginDto): Promise<UserRep> {
+    return await this.userService.login(loginUserDto);
   }
 
   @Get(':id')

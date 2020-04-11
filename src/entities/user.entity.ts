@@ -28,6 +28,23 @@ export class User {
   })
   role: UserRole
 
+  @Column('timestamp', {
+    nullable: false,
+    default: () => 'CURRENT_TIMESTAMP',
+    name: 'created_at',
+    comment: '创建时间',
+  })
+  createdAt: Date;
+
+
+  @Column('timestamp', {
+    nullable: false,
+    default: () => 'CURRENT_TIMESTAMP',
+    name: 'updated_at',
+    comment: '最后更新时间',
+  })
+  updatedAt: Date;
+
   @BeforeInsert()
   makePwd() {
     this.password = encodeMD5(this.password);

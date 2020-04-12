@@ -16,8 +16,8 @@ async function bootstrap() {
   
   // 配置swagger
   const options = new DocumentBuilder()
-    .setTitle('博客后台接口文档')
-    .setDescription('博客后台接口文档')
+    .setTitle('接口文档')
+    .setDescription('接口文档')
     .addBearerAuth({ type: 'apiKey', in: 'header', name: 'Authorization' })
     .setVersion('1.0')
     .build();

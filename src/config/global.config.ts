@@ -6,6 +6,6 @@ export default registerAs('global', () => {
   return {
     secret: process.env.SECRET, // jwt加盐
     expiresIn: process.env.EXPIRES_IN, // jwt有效期
-    whiteUrl: [`${PREFIX}/auth/login`, `${PREFIX}/user`], // 白名单api
+    whiteUrl: [`${PREFIX}/login`], // 白名单api
   }
 })

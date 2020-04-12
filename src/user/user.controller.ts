@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/user.dto';
-import { UserLoginDto } from './dto/user.login.dto';
 import { UserRep } from './dto/user.rep.dto';
 
 @Controller('user')
@@ -11,7 +10,7 @@ import { UserRep } from './dto/user.rep.dto';
 export class UserController {
 
   constructor(
-    private readonly userService: UserService,
+    private readonly userService: UserService
   ) {}
 
   @Get()
@@ -25,13 +24,6 @@ export class UserController {
   @ApiOkResponse({ type: UserRep })
   async create(@Body() createUserDto: CreateUserDto): Promise<UserRep> {
     return await this.userService.create(createUserDto);
-  }
-
-  @Post('login')
-  @ApiOperation({ summary: '用户登录' })
-  @ApiOkResponse({ type: UserRep })
-  async login(@Body() loginUserDto: UserLoginDto): Promise<UserRep> {
-    return await this.userService.login(loginUserDto);
   }
 
   @Get(':id')

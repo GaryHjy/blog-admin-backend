@@ -5,7 +5,7 @@ import { User } from '../entities/user.entity';
 import { checkPwd } from 'src/utils/encrypt';
 import { UserRep } from './dto/user.rep.dto';
 import { CreateUserDto } from './dto/user.dto';
-import { UserLoginDto } from './dto/user.login.dto';
+import { UserLoginDto } from '../login/dto/user.login.dto';
 
 
 @Injectable()

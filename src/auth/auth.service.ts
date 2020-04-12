@@ -19,7 +19,7 @@ export class AuthService {
     return null;
   }
 
-  async login(user: any) {
+  async sign(user: any) {
     const {username, password, id } = user;
     return {
       accessToken: this.jwtService.sign({

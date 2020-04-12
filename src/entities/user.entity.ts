@@ -11,14 +11,26 @@ enum UserRole {
 @Entity()
 export class User {
 
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({
+    type: 'int',
+    name: 'id',
+    comment: '主键id'
+  })
   id: number;
 
-  @Column({ length: 50})
+  @Column('varchar', {
+    name: 'username',
+    comment: '用户名',
+    length: 50,
+  })
   username: string;
 
   @Exclude() // 排除字段不返回
-  @Column({ length: 100, name: 'password', })
+  @Column('varchar',{
+    name: 'password',
+    comment: '密码',
+    length: 100,
+  })
   password: string
 
   @Column({

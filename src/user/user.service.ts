@@ -73,7 +73,40 @@ export class UserService {
     }
   }
 
-  async findOne(param: object) {
-    return await this.UserRepository.findOne(param)
+  /**
+   * @author GaryHjy
+   * @description 根据id查询信息
+   * @param {number} id
+   * @returns {Promise<UserRep>}
+   * @memberof UserService
+   */
+  async findById(id: number): Promise<UserRep> {
+    const user = await this.UserRepository.findOne({id})
+    if (user) {
+      return user;
+    } else {
+      throw new HttpException(
+        {
+          message: '用户不存在',
+          code: 400
+        },
+        HttpStatus.OK,
+      );
+    }
+  }
+
+  /**
+   * @author GaryHjy
+   * @description 根据用户名查询信息
+   * @param {string} username
+   * @returns
+   * @memberof UserService
+   */
+  async findByUsername(username: string) {
+    return await this.UserRepository.findOne({
+      where: {
+        username
+      }
+    });
   }
 }

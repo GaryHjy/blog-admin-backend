@@ -28,7 +28,7 @@ export class UserController {
 
   @Get(':id')
   @ApiOperation({ summary: '用户信息' })
-  detail(@Param('id') id:string ) {
-    return this.userService.findOne({id})
+  async detail(@Param('id') id:number ) {
+    return await this.userService.findById(id)
   }
 }

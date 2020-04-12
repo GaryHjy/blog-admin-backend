@@ -1,14 +1,26 @@
 import { ApiProperty } from "@nestjs/swagger"
-import { IsString, IsNotEmpty} from 'class-validator'
+import { IsEnum, IsOptional} from 'class-validator'
+import { Transform } from "class-transformer"
 
 
-export class CreateUserDto {
-  @ApiProperty({ description: '用户名' })
-  @IsString({ message: '用户名必须为字符类型'})
-  @IsNotEmpty({ message: '用户名不能为空'})
-  username: string
+export class UserDto {
 
-  @ApiProperty({ description: '密码' })
-  password: string
+  @ApiProperty({
+    required: false,
+    description: '用户角色',
+    enum: ['root', 'admin', 'guest'], // 枚举
+  })
+  @IsEnum({ root: 'root', admin: 'admin', guest: 'guest'})
+  role?: any
+
+  @ApiProperty({ 
+    required: false,
+    description: '状态',
+    enum: [0, 1], // 枚举
+  })
+  @IsEnum({ 禁用: 0, 启用: 1 }, { message: '必须是0或者1' })
+  @Transform(value => parseInt(value, 10))
+  @IsOptional() // 可选的
+  status?: number
 
 }

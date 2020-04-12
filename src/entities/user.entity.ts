@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from 'typeorm';
 import { encodeMD5 } from 'src/utils/encrypt';
-import { Exclude } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 
 enum UserRole {
   ROOT = 'root',
@@ -39,6 +39,14 @@ export class User {
     default: UserRole.GUEST
   })
   role: UserRole
+
+  @Column('tinyint',{
+    nullable: true,
+    default: () => 1,
+    name: 'status',
+    comment: '状态',
+  })
+  status: number | null
 
   @Column('timestamp', {
     nullable: false,

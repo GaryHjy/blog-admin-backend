@@ -4,8 +4,8 @@ import { Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
 import { checkPwd } from 'src/utils/encrypt';
 import { UserRep } from './dto/user.rep.dto';
-import { CreateUserDto } from './dto/user.dto';
 import { UserLoginDto } from './dto/user.login.dto';
+import { CreateUserDto } from './dto/create.user.dto';
 
 
 @Injectable()

@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/user.dto';
 import { UserRep } from './dto/user.rep.dto';
+import { CreateUserDto } from './dto/create.user.dto';
 
 @Controller('user')
 @ApiTags('用户')
@@ -14,20 +14,25 @@ export class UserController {
   ) {}
 
   @Get()
-  @ApiOperation({ summary: '用户列表', description: '获取用户列表'})
+  @ApiOperation({ summary: '获取用户列表', description: '获取用户列表'})
   findAll() {
     return this.userService.findAll();
   }
 
   @Post()
-  @ApiOperation({ summary: '用户创建'})
+  @ApiOperation({ summary: '创建用户', description: '创建用户'})
   @ApiOkResponse({ type: UserRep })
   async create(@Body() createUserDto: CreateUserDto): Promise<UserRep> {
     return await this.userService.create(createUserDto);
   }
 
+  @Put(':id')
+  update(@Param('id') id:number, ) {
+    console.log(id)
+  }
+
   @Get(':id')
-  @ApiOperation({ summary: '用户信息' })
+  @ApiOperation({ summary: '获取用户信息', description: '获取用户信息' })
   async detail(@Param('id') id:number ) {
     return await this.userService.findById(id)
   }

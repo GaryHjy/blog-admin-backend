@@ -3,6 +3,7 @@ import { ApiTags, ApiOperation, ApiBearerAuth, ApiOkResponse } from '@nestjs/swa
 import { UserService } from './user.service';
 import { UserRep } from './dto/user.rep.dto';
 import { CreateUserDto } from './dto/create.user.dto';
+import { UpdateUserDto } from './dto/update.user.dto';
 
 @Controller('user')
 @ApiTags('用户')
@@ -27,8 +28,9 @@ export class UserController {
   }
 
   @Put(':id')
-  update(@Param('id') id:number, ) {
-    console.log(id)
+  @ApiOperation({ summary: '更新用户', description: '更新用户'})
+  async update(@Param('id') id:number, @Body() updateUserDto: UpdateUserDto) {
+    return await this.userService.updateById(id, updateUserDto)
   }
 
   @Get(':id')

@@ -96,6 +96,14 @@ export class UserService {
     }
   }
 
+  /**
+   * @author GaryHjy
+   * @description 根据id修改信息
+   * @param {number} id
+   * @param {UpdateUserDto} updateUserDto
+   * @returns
+   * @memberof UserService
+   */
   async updateById(id: number, updateUserDto: UpdateUserDto) {
     const { username, role, status } = updateUserDto
     if (username) {

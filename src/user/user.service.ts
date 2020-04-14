@@ -6,6 +6,7 @@ import { checkPwd } from 'src/utils/encrypt';
 import { UserRep } from './dto/user.rep.dto';
 import { UserLoginDto } from './dto/user.login.dto';
 import { CreateUserDto } from './dto/create.user.dto';
+import { UpdateUserDto } from './dto/update.user.dto';
 
 
 @Injectable()
@@ -92,6 +93,34 @@ export class UserService {
         },
         HttpStatus.OK,
       );
+    }
+  }
+
+  async updateById(id: number, updateUserDto: UpdateUserDto) {
+    const { username, role, status } = updateUserDto
+    if (username) {
+      const result = await this.UserRepository.count({ username });
+      if (result) {
+        throw new HttpException(
+          {
+            message: '用户名已存在',
+            code: 400
+          },
+          HttpStatus.OK,
+        )
+      } 
+    }
+    const { raw: { changedRows } } = await this.UserRepository.update({ id }, { username, role, status })
+    if (changedRows) {
+      return await this.findById(id)
+    } else {
+      throw new HttpException(
+        {
+          message: '修改失败',
+          code: 400
+        },
+        HttpStatus.OK,
+      )
     }
   }
 

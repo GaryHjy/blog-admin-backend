@@ -28,13 +28,13 @@ export class UserController {
   }
 
   @Put(':id')
-  @ApiOperation({ summary: '更新用户', description: '更新用户'})
+  @ApiOperation({ summary: '更新用户信息', description: '根据id更新用户信息'})
   async update(@Param('id') id:number, @Body() updateUserDto: UpdateUserDto) {
     return await this.userService.updateById(id, updateUserDto)
   }
 
   @Get(':id')
-  @ApiOperation({ summary: '获取用户信息', description: '获取用户信息' })
+  @ApiOperation({ summary: '获取用户信息', description: '根据id获取用户信息' })
   async detail(@Param('id') id:number ) {
     return await this.userService.findById(id)
   }

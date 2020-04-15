@@ -62,7 +62,8 @@ export class UserService {
     });
     // 判断用户名密码
     if (user && checkPwd(password, user.password)) {
-      return user;
+      const { password, ...params } = user;
+      return params;
     } else {
       throw new HttpException(
         {

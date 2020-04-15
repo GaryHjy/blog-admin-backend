@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { encodeMD5 } from 'src/utils/encrypt';
 import { Exclude } from 'class-transformer';
 
@@ -49,18 +49,17 @@ export class User {
   })
   status: number | null
 
-  @Column('timestamp', {
-    nullable: false,
-    default: () => 'CURRENT_TIMESTAMP',
+  // 创建时间
+  @CreateDateColumn({
+    type: 'timestamp',
     name: 'created_at',
     comment: '创建时间',
   })
   createdAt: Date;
 
-
-  @Column('timestamp', {
-    nullable: false,
-    default: () => 'CURRENT_TIMESTAMP',
+  // 自动更新时间
+  @UpdateDateColumn({
+    type: 'timestamp',
     name: 'updated_at',
     comment: '最后更新时间',
   })

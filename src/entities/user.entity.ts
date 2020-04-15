@@ -19,6 +19,7 @@ export class User {
   id: number;
 
   @Column('varchar', {
+    nullable: false,
     name: 'username',
     comment: '用户名',
     length: 50,
@@ -35,6 +36,7 @@ export class User {
   password: string
 
   @Column({
+    nullable: false,
     type: 'enum',
     enum: UserRole,
     default: UserRole.GUEST
@@ -51,6 +53,7 @@ export class User {
 
   // 创建时间
   @CreateDateColumn({
+    nullable: false,
     type: 'timestamp',
     name: 'created_at',
     comment: '创建时间',
@@ -59,9 +62,10 @@ export class User {
 
   // 自动更新时间
   @UpdateDateColumn({
+    nullable: false,
     type: 'timestamp',
     name: 'updated_at',
-    comment: '最后更新时间',
+    comment: '更新时间',
   })
   updatedAt: Date;
 

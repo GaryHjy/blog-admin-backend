@@ -104,7 +104,7 @@ export class UserService {
    * @returns
    * @memberof UserService
    */
-  async updateById(id: number, updateUserDto: UpdateUserDto) {
+  async updateById(id: number, updateUserDto: UpdateUserDto): Promise<UserRep> {
     const { username, role, status } = updateUserDto
     if (username) {
       const result = await this.UserRepository.count({ username });

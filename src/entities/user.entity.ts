@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from 'typeorm';
 import { encodeMD5 } from 'src/utils/encrypt';
-import { Exclude, Expose } from 'class-transformer';
+import { Exclude } from 'class-transformer';
 
 enum UserRole {
   ROOT = 'root',
@@ -27,6 +27,7 @@ export class User {
 
   @Exclude() // 排除字段不返回
   @Column('varchar',{
+    nullable: false,
     name: 'password',
     comment: '密码',
     length: 100,

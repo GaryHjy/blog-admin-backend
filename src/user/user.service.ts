@@ -7,6 +7,7 @@ import { UserRep } from './dto/user.rep.dto';
 import { UserLoginDto } from './dto/user.login.dto';
 import { CreateUserDto } from './dto/create.user.dto';
 import { UpdateUserDto } from './dto/update.user.dto';
+import { UserLoginRep } from './dto/user.login.rep.dto';
 
 
 @Injectable()
@@ -52,7 +53,7 @@ export class UserService {
    * @returns {Promise<UserRep>}
    * @memberof UserService
    */
-  async login(userLoginDto: UserLoginDto): Promise<UserRep> {
+  async login(userLoginDto: UserLoginDto): Promise<UserLoginRep> {
     const { username, password } = userLoginDto;
     // 查询用户
     const user = await this.UserRepository.findOne({

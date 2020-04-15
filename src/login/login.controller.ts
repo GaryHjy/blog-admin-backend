@@ -15,7 +15,7 @@ export class LoginController {
   ) {}
 
   @Post()
-  @ApiOperation({ summary: '用户登录'})
+  @ApiOperation({ summary: '用户登录', description: '根据用户名密码登录'})
   @ApiOkResponse({ type: UserRep})
   async login(@Body() userLoginDto: UserLoginDto): Promise<UserRep> {
     const user = await this.userService.login(userLoginDto)

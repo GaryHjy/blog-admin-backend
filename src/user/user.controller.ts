@@ -36,6 +36,7 @@ export class UserController {
 
   @Get(':id')
   @ApiOperation({ summary: '获取用户信息', description: '根据id获取用户信息' })
+  @ApiOkResponse({ type: UserRep })
   async detail(@Param('id') id: number): Promise<UserRep> {
     return await this.userService.findById(id)
   }

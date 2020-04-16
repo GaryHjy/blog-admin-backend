@@ -32,6 +32,6 @@ export class AuthService {
 
   // 校验token是否有效
   async verifyToken(token: string) {
-    return this.jwtService.verify(token)
+    return await this.jwtService.verify(token)
   }
 }

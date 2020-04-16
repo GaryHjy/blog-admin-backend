@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, HttpStatus, HttpCode } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { UserRep } from './dto/user.rep.dto';
@@ -39,5 +39,12 @@ export class UserController {
   @ApiOkResponse({ type: UserRep })
   async detail(@Param('id') id: number): Promise<UserRep> {
     return await this.userService.findById(id)
+  }
+
+  @Delete(':id')
+  @ApiOperation({ summary: '删除用户信息', description: '根据用户id删除用户信息'})
+  @HttpCode(HttpStatus.OK)
+  async remove(@Param('id') id: number): Promise<boolean> {
+    return await this.userService.removeUserById(id);
   }
 }

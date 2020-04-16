@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Param, Put, Delete, HttpStatus, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, HttpStatus, HttpCode, UseGuards, Request } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { UserRep } from './dto/user.rep.dto';
 import { CreateUserDto } from './dto/create.user.dto';
 import { UpdateUserDto } from './dto/update.user.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('user')
 @ApiTags('用户')
@@ -41,10 +42,12 @@ export class UserController {
     return await this.userService.findById(id)
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   @ApiOperation({ summary: '删除用户信息', description: '根据用户id删除用户信息'})
   @HttpCode(HttpStatus.OK)
-  async remove(@Param('id') id: number): Promise<boolean> {
-    return await this.userService.removeUserById(id);
+  async remove(@Request() req, @Param('id') id: number): Promise<boolean> {
+    const {id: currentId} = req.user; // 解析jwt拿到当前用户id
+    return await this.userService.removeUserById(currentId, id);
   }
 }

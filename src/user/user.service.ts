@@ -141,7 +141,16 @@ export class UserService {
    * @returns {Promise<boolean>}
    * @memberof UserService
    */
-  async removeUserById(id: number): Promise<boolean> {
+  async removeUserById(currentId: number, id: number): Promise<boolean> {
+    if (currentId == id) {
+      throw new HttpException(
+        {
+          message: '不能自己删除自己',
+          code: 400
+        },
+        HttpStatus.OK,
+      )
+    }
     const user = await this.findById(id)
     if(user) {
       const { raw: { changedRows } } = await this.UserRepository.delete({id})

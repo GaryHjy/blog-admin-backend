@@ -72,6 +72,7 @@ export class UserService {
     } 
     // 判断用户名密码
     if (user && checkPwd(password, user.password)) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...params } = user;
       return params;
     } else {

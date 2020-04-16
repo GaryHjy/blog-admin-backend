@@ -61,6 +61,15 @@ export class UserService {
         username
       }
     });
+    if (!user) {
+      throw new HttpException(
+        {
+          message: '用户名不存在',
+          code: 400
+        },
+        HttpStatus.OK,
+      )
+    } 
     // 判断用户名密码
     if (user && checkPwd(password, user.password)) {
       const { password, ...params } = user;

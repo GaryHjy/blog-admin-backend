@@ -134,6 +134,18 @@ export class UserService {
     }
   }
 
+  async removeUserById(id: number): Promise<boolean> {
+    const user = await this.findById(id)
+    if(user) {
+      const { raw: { changedRows } } = await this.UserRepository.delete({id})
+      if (changedRows) {
+        return true
+      } else {
+        return false
+      }
+    }
+  }
+
   /**
    * @author GaryHjy
    * @description 根据用户名查询信息

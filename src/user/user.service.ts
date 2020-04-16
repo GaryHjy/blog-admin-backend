@@ -134,6 +134,13 @@ export class UserService {
     }
   }
 
+  /**
+   * @author GaryHjy
+   * @description 根据用户id删除用户信息
+   * @param {number} id 用户id
+   * @returns {Promise<boolean>}
+   * @memberof UserService
+   */
   async removeUserById(id: number): Promise<boolean> {
     const user = await this.findById(id)
     if(user) {

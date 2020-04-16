@@ -164,11 +164,7 @@ export class UserService {
     const user = await this.findById(id)
     if(user) {
       const { raw: { changedRows } } = await this.UserRepository.delete({id})
-      if (changedRows) {
-        return true
-      } else {
-        return false
-      }
+      return !changedRows
     }
   }
 

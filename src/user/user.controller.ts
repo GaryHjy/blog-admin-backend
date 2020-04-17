@@ -7,7 +7,7 @@ import { UpdateUserDto } from './dto/update.user.dto';
 import { CurrentUser } from 'src/decorators/currnet.user';
 
 @Controller('user')
-@ApiTags('用户')
+@ApiTags('用户模块')
 @ApiBearerAuth()
 export class UserController {
 

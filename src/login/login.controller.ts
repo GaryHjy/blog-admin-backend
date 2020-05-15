@@ -19,11 +19,11 @@ export class LoginController {
   @ApiOkResponse({ type: UserLoginRep})
   async login(@Body() userLoginDto: UserLoginDto): Promise<UserLoginRep> {
     const user = await this.userService.login(userLoginDto);
-    const accessToken = await this.authService.sign(user);
+    const { accessToken } = await this.authService.sign(user);
 
     return {
       ...user,
-      ...accessToken
+      accessToken
     }
   }
 }

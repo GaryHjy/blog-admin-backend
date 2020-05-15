@@ -9,6 +9,7 @@ import globalConfig from './config/global.config';
 import { AuthGuard } from './guard/auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { LoginModule } from './login/login.module';
+import { TokenModule } from './token/token.module';
 
 // 实体类路径
 const entitiesPath = path.resolve(__dirname + '/*/**/*.entity{.ts,.js}')
@@ -37,6 +38,7 @@ const entitiesPath = path.resolve(__dirname + '/*/**/*.entity{.ts,.js}')
     UserModule,
     AuthModule,
     LoginModule,
+    TokenModule,
   ],
   providers: [{
     provide: APP_GUARD,

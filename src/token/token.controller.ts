@@ -18,10 +18,9 @@ export class TokenController {
   async getUserByToken(@Query('token') token: string): Promise<UserLoginRep> {
     const { id } = await this.authService.verifyToken(token);
     const user = await this.userService.findById(id);
-    const { accessToken } = await this.authService.sign(user);
     return {
       ...user,
-      accessToken
+      accessToken: token
     }
   }
 }

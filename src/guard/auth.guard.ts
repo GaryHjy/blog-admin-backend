@@ -30,14 +30,10 @@ export class AuthGuard implements CanActivate {
 
     // 判断authorization是否携带token
     if(token) {
-      try {
-        const user = await this.authService.verifyToken(token) // 校验token是否有效
-        // 解析token将用户信息存储在请求头中
-        request.user = user
-        return true
-      } catch (e) {
-        throw new HttpException('token已过期，请重新登录', HttpStatus.UNAUTHORIZED); // 捕获过期异常
-      }
+      const user = await this.authService.verifyToken(token) // 校验token是否有效
+      // 解析token将用户信息存储在请求头中
+      request.user = user
+      return true
     } else {
       throw new HttpException('没有授权不能访问,请先登录', HttpStatus.UNAUTHORIZED);
     }

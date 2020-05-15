@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt'
 import { checkPwd } from 'src/utils/encrypt';
@@ -32,6 +32,10 @@ export class AuthService {
 
   // 校验token是否有效
   async verifyToken(token: string) {
-    return await this.jwtService.verify(token)
+    try {
+      return await this.jwtService.verify(token)
+    } catch (e) {
+      throw new HttpException('token已过期，请重新登录', HttpStatus.UNAUTHORIZED); // 捕获过期异常
+    }
   }
 }

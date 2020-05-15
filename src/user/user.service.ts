@@ -95,6 +95,8 @@ export class UserService {
    */
   async findById(id: number): Promise<UserRep> {
     const user = await this.UserRepository.findOne({id})
+    // 去除password字段
+    delete user.password;
     if (user) {
       return user;
     } else {

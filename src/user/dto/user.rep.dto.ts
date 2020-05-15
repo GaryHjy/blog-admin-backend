@@ -11,7 +11,7 @@ export class UserRep {
   @ApiProperty({ 
     description: '用户状态',
     enum: [0, 1]
-   })
+  })
   status: number
 
   @ApiProperty({ 

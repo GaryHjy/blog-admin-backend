@@ -9,6 +9,10 @@ import { CreateUserDto } from './dto/create.user.dto';
 import { UpdateUserDto } from './dto/update.user.dto';
 import { UserLoginRep } from './dto/user.login.rep.dto';
 
+enum UserStatus {
+  ENABLE = 1,
+  DISABLE = 0
+}
 
 @Injectable()
 export class UserService {
@@ -69,7 +73,16 @@ export class UserService {
         },
         HttpStatus.OK,
       )
-    } 
+    }
+    if (user.status === UserStatus.DISABLE) {
+      throw new HttpException(
+        {
+          message: '当前账号被禁用，请联系管理员',
+          code: 400
+        },
+        HttpStatus.OK,
+      )
+    }
     // 判断用户名密码
     if (user && checkPwd(password, user.password)) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars

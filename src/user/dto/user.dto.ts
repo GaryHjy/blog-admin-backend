@@ -1,5 +1,5 @@
-import { ApiProperty } from "@nestjs/swagger"
-import { IsEnum, IsOptional} from 'class-validator'
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger"
+import { IsEnum, IsOptional, IsEmail, IsMobilePhone} from 'class-validator'
 import { Transform } from "class-transformer"
 
 
@@ -13,6 +13,17 @@ export class UserDto {
   })
   @IsEnum({ root: 'root', admin: 'admin', guest: 'guest'})
   role?: any
+
+  @ApiPropertyOptional({ required: false, description: '邮箱' })
+  // eslint-disable-next-line @typescript-eslint/camelcase
+  @IsEmail({ allow_display_name: true }, { message: '邮箱格式错误' })
+  @IsOptional()
+  readonly email?: string;
+
+  @ApiPropertyOptional({ required: false, description: '手机号码' })
+  @IsMobilePhone('zh-CN', { message: '手机号码格式错误' })
+  @IsOptional()
+  readonly mobile?: string;
 
   @ApiProperty({ 
     required: false,

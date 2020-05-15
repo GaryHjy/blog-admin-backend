@@ -8,6 +8,12 @@ export class UserRep {
   @ApiProperty({ description: '用户名' })
   username: string;
 
+  @ApiProperty({ description: '邮箱' })
+  email: string;
+
+  @ApiProperty({ description: '手机号' })
+  mobile: string;
+
   @ApiProperty({ 
     description: '用户状态',
     enum: [0, 1]

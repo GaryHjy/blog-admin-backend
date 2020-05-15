@@ -10,11 +10,10 @@ enum UserRole {
 
 @Entity()
 export class User {
-
   @PrimaryGeneratedColumn({
     type: 'int',
     name: 'id',
-    comment: '主键id'
+    comment: '主键id',
   })
   id: number;
 
@@ -27,29 +26,45 @@ export class User {
   username: string;
 
   @Exclude() // 排除字段不返回
-  @Column('varchar',{
+  @Column('varchar', {
     nullable: false,
     name: 'password',
     comment: '密码',
     length: 100,
   })
-  password: string
+  password: string;
+
+  @Column('varchar', {
+    nullable: true,
+    length: 11,
+    name: 'mobile',
+    comment: '用户手机号码',
+  })
+  mobile: string | null;
 
   @Column({
     nullable: false,
     type: 'enum',
     enum: UserRole,
-    default: UserRole.GUEST
+    default: UserRole.GUEST,
   })
-  role: UserRole
+  role: UserRole;
 
-  @Column('tinyint',{
+  @Column('tinyint', {
     nullable: true,
     default: () => 1,
     name: 'status',
     comment: '状态',
   })
-  status: number | null
+  status: number | null;
+
+  @Column('varchar', {
+    nullable: true,
+    length: 50,
+    name: 'email',
+    comment: '用户邮箱',
+  })
+  email: string | null;
 
   // 创建时间
   @CreateDateColumn({

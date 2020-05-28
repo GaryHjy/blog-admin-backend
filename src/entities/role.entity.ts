@@ -1,5 +1,6 @@
-import { PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Entity } from "typeorm";
 
+@Entity()
 export class RoleEntity {
   @PrimaryGeneratedColumn({
     type: 'int',
@@ -28,8 +29,7 @@ export class RoleEntity {
     type: 'int',
     nullable: false,
     name: 'sort',
-    comment: '排序值',
-    length: 11
+    comment: '排序值'
   })
   sort: number;
 

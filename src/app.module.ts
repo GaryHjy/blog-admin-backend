@@ -8,7 +8,6 @@ import databaseConfig from './config/database.config';
 import globalConfig from './config/global.config';
 import { AuthGuard } from './guard/auth.guard';
 import { APP_GUARD } from '@nestjs/core';
-import { LoginModule } from './login/login.module';
 import { AppController } from './app.controller';
 
 // 实体类路径
@@ -37,7 +36,6 @@ const entitiesPath = path.resolve(__dirname + '/*/**/*.entity{.ts,.js}')
     }),
     UserModule,
     AuthModule,
-    LoginModule,
   ],
   providers: [{
     provide: APP_GUARD,

@@ -11,8 +11,15 @@ export class AppController {
   constructor(
     private readonly userService: UserService,
     private readonly authService: AuthService
-  ) {  }
+  ) {}
 
+  /**
+   * @description 根据token获取用户信息
+   * @author GaryHjy
+   * @param {string} token 用户token
+   * @returns {Promise<UserLoginRep>} 返回UserLoginRep Dto
+   * @memberof AppController
+   */
   @Get('token')
   @ApiOperation({ summary: '根据token获取用户信息', description: '根据token获取用户信息' })
   @ApiOkResponse({ type: UserLoginRep })
@@ -25,6 +32,13 @@ export class AppController {
     }
   }
 
+  /**
+   * @description 用户登录
+   * @author GaryHjy
+   * @param {UserLoginDto} userLoginDto body参数
+   * @returns {Promise<UserLoginRep>} 返回UserLoginRep Dto
+   * @memberof AppController
+   */
   @Post('login')
   @ApiOperation({ summary: '用户登录', description: '根据用户名密码登录' })
   @ApiOkResponse({ type: UserLoginRep })

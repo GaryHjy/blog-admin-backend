@@ -1,6 +1,8 @@
-import { Controller, Get, Post, Put, Delete } from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
+import { Controller, Get, Post, Put, Delete, Body } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth, ApiOperation, ApiOkResponse } from '@nestjs/swagger';
 import { RoleService } from './role.service';
+import { RoleRepDto } from './dto/role.rep.dto';
+import { CreateRoleDto } from './dto/create.role.dto';
 
 @Controller('role')
 @ApiTags('角色模块')
@@ -19,8 +21,9 @@ export class RoleController {
 
   @Post()
   @ApiOperation({ summary: '创建角色', description: '创建角色'})
-  create() {
-    return 'ok'
+  @ApiOkResponse({type: RoleRepDto})
+  async create(@Body() createRoleDto: CreateRoleDto): Promise<RoleRepDto> {
+    return await this.roleService.create(createRoleDto);
   }
 
   @Put()

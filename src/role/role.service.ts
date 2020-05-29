@@ -53,7 +53,18 @@ export class RoleService {
   }
 
   async findById(id: number):Promise<RoleEntity> {
-    return await this.RoleRepository.findOne({id});
+    const role = await this.RoleRepository.findOne({id});
+    if(role) {
+      return role;
+    } else {
+      throw new HttpException(
+        {
+          message: '角色不存在',
+          code: 400
+        },
+        HttpStatus.OK,
+      );
+    }
   }
 
   /**

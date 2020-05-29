@@ -27,6 +27,13 @@ export class RoleController {
     return await this.roleService.create(createRoleDto);
   }
 
+  @Get(':id')
+  @ApiOperation({summary: '获取角色信息', description: '通过id获取角色信息'})
+  @ApiOkResponse({type: RoleRepDto })
+  async detail(@Param('id') id:number): Promise<RoleRepDto> {
+    return await this.roleService.findById(id);
+  }
+
   @Put(':id')
   @ApiOperation({summary: '更新角色', description: '更新角色信息'})
   async update(@Param('id') id: number, @Body() updateRoleDto: UpdateRoleDto): Promise<RoleRepDto> {

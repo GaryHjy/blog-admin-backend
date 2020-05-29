@@ -25,6 +25,7 @@ export class RoleService {
   async create(createRoleDto: CreateRoleDto) {
     const { roleName, roleCode} = createRoleDto;
     const isRoleName = await this.RoleRepository.count({ roleName });
+    // 判断角色明是否存在
     if (isRoleName) {
       throw new HttpException(
         {
@@ -35,6 +36,7 @@ export class RoleService {
       )
     }
     const isCode = await this.RoleRepository.count({ roleCode });
+    // 判断角色编号是否存在
     if(isCode) {
       throw new HttpException(
         {

@@ -52,6 +52,13 @@ export class RoleService {
     return await this.RoleRepository.save(role);
   }
 
+  /**
+   * @author GaryHjy
+   * @description 根据id查询角色信息
+   * @param {number} id
+   * @returns {Promise<RoleEntity>}
+   * @memberof RoleService
+   */
   async findById(id: number):Promise<RoleEntity> {
     const role = await this.RoleRepository.findOne({id});
     if(role) {

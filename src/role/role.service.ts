@@ -56,10 +56,19 @@ export class RoleService {
     return await this.RoleRepository.findOne({id});
   }
 
+  /**
+   * @author GaryHjy
+   * @description 根据id更新角色信息
+   * @param {number} id
+   * @param {UpdateRoleDto} updateRoleDto
+   * @returns {Promise<RoleRepDto>}
+   * @memberof RoleService
+   */
   async updateById(id: number, updateRoleDto:UpdateRoleDto): Promise<RoleRepDto> {
-    const role = await this.findById(id);
+    const role = await this.RoleRepository.findOne({ id });
     const { roleName: newRoleName, roleCode: newRoleCode } = updateRoleDto;
     const { roleName: oldRoleName, roleCode: oldRoleCode } = role;
+    // 判断新旧角色名是否不一样
     if (newRoleName !== oldRoleName) {
       const isRoleName = await this.RoleRepository.count({ roleName: newRoleName });
       // 判断角色明是否存在
@@ -74,6 +83,7 @@ export class RoleService {
       }
     }
 
+    // 判断新旧code是否不一样
     if (newRoleCode !== oldRoleCode) {
       const isCode = await this.RoleRepository.count({ roleCode: newRoleCode });
       // 判断角色编号是否存在
@@ -88,6 +98,7 @@ export class RoleService {
       }
     }
 
+    // 更新
     const { raw: { changedRows } } = await this.RoleRepository.update({ id }, updateRoleDto);
     if (changedRows) {
       return await this.findById(id);

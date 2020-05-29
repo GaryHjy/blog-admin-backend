@@ -1,15 +1,20 @@
 import { Controller, Get, Post, Put, Delete } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
+import { RoleService } from './role.service';
 
 @Controller('role')
 @ApiTags('角色模块')
 @ApiBearerAuth()
 export class RoleController {
 
+  constructor(
+    private readonly roleService: RoleService
+  ) {}
+
   @Get()
   @ApiOperation({ summary: '获取角色列表', description: '获取角色列表'})
   findAll() {
-    return []
+    return this.roleService.findAll();
   }
 
   @Post()

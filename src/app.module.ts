@@ -10,7 +10,6 @@ import { AuthGuard } from './guard/auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { RoleController } from './role/role.controller';
-import { RoleService } from './role/role.service';
 import { RoleModule } from './role/role.module';
 
 // 实体类路径
@@ -44,7 +43,7 @@ const entitiesPath = path.resolve(__dirname + '/*/**/*.entity{.ts,.js}')
   providers: [{
     provide: APP_GUARD,
     useClass: AuthGuard
-  }, RoleService],
+  }],
   controllers: [AppController, RoleController],
 })
 export class AppModule {}

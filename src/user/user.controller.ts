@@ -4,7 +4,7 @@ import { UserService } from './user.service';
 import { UserRep } from './dto/user.rep.dto';
 import { CreateUserDto } from './dto/create.user.dto';
 import { UpdateUserDto } from './dto/update.user.dto';
-import { CurrentUser } from 'src/decorators/currnet.user';
+import { CurrentUser } from 'src/decorators/current.user';
 
 @Controller('user')
 @ApiTags('用户模块')

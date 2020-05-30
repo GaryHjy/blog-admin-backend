@@ -41,9 +41,9 @@ export class RoleController {
     return await this.roleService.updateById(id, updateRoleDto);
   }
 
-  @Delete()
+  @Delete(':id')
   @ApiOperation({summary: '删除角色', description: '根据角色id删除角色信息'})
-  remove() {
-    return 'ok'
+  async remove(@Param('id') id: number): Promise<boolean> {
+    return await this.roleService.removeRoleById(id);
   }
 }

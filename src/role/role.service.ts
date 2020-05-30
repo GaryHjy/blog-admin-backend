@@ -132,4 +132,10 @@ export class RoleService {
     
   }
 
+  async removeRoleById(id:number): Promise<boolean> {
+    await this.findById(id);
+    const { raw: { changedRows }} = await this.RoleRepository.delete({id});
+    return !changedRows;
+  }
+
 }

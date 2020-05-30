@@ -132,6 +132,13 @@ export class RoleService {
     
   }
 
+  /**
+   * @author GaryHjy
+   * @description 根据id删除角色
+   * @param {number} id
+   * @returns {Promise<boolean>}
+   * @memberof RoleService
+   */
   async removeRoleById(id:number): Promise<boolean> {
     await this.findById(id);
     const { raw: { changedRows }} = await this.RoleRepository.delete({id});

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiOperation, ApiOkResponse } from '@nestjs/swagger';
 import { RoleService } from './role.service';
 import { RoleRepDto } from './dto/role.rep.dto';
@@ -43,6 +43,7 @@ export class RoleController {
 
   @Delete(':id')
   @ApiOperation({summary: '删除角色', description: '根据角色id删除角色信息'})
+  @HttpCode(HttpStatus.OK)
   async remove(@Param('id') id: number): Promise<boolean> {
     return await this.roleService.removeRoleById(id);
   }

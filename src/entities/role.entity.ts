@@ -11,7 +11,7 @@ export class RoleEntity {
 
   @Column('varchar', {
     nullable: false,
-    name: 'roleName',
+    name: 'role_name',
     comment: '角色名称',
     length: 100,
   })
@@ -19,7 +19,7 @@ export class RoleEntity {
 
   @Column('varchar', {
     nullable: false,
-    name: 'roleCode',
+    name: 'role_code',
     comment: '角色编号',
     length: 100,
   })

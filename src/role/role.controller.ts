@@ -36,6 +36,7 @@ export class RoleController {
 
   @Put(':id')
   @ApiOperation({summary: '更新角色', description: '更新角色信息'})
+  @ApiOkResponse({type: RoleRepDto})
   async update(@Param('id') id: number, @Body() updateRoleDto: UpdateRoleDto): Promise<RoleRepDto> {
     return await this.roleService.updateById(id, updateRoleDto);
   }

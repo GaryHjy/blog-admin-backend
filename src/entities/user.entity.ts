@@ -9,7 +9,7 @@ enum UserRole {
 }
 
 @Entity()
-export class UserEntity {
+export class User {
   @PrimaryGeneratedColumn({
     type: 'int',
     name: 'id',

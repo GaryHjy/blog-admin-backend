@@ -1,7 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UserEntity } from '../entities/user.entity';
+import { User } from '../entities/user.entity';
 import { checkPwd } from 'src/utils/encrypt';
 import { UserRep } from './dto/user.rep.dto';
 import { UserLoginDto } from './dto/user.login.dto';
@@ -17,11 +17,11 @@ enum UserStatus {
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(UserEntity)
-    private readonly UserRepository: Repository<UserEntity>
+    @InjectRepository(User)
+    private readonly UserRepository: Repository<User>
   ) {}
 
-  findAll(): Promise<UserEntity[]> {
+  findAll(): Promise<User[]> {
     return this.UserRepository.find()
   }
 
@@ -32,7 +32,7 @@ export class UserService {
    * @returns {Promise<User>}
    * @memberof UserService
    */
-  async create(createUserDto: CreateUserDto): Promise<UserEntity>{
+  async create(createUserDto: CreateUserDto): Promise<User>{
     const { username } = createUserDto;
     const result = await this.UserRepository.count({ username });
     // 判断是否存在用户名

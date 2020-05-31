@@ -36,6 +36,22 @@ export class User {
 
   @Column('varchar', {
     nullable: true,
+    name: 'nickname',
+    comment: '用户昵称',
+    length: 64,
+  })
+  nickName: string;
+
+  @Column('varchar', {
+    nullable: true,
+    name: 'avatar',
+    comment: '头像',
+    length: 255
+  })
+  avatar: string;
+
+  @Column('varchar', {
+    nullable: true,
     length: 11,
     name: 'mobile',
     comment: '用户手机号码',

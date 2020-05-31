@@ -14,6 +14,12 @@ export class UserDto {
   @IsEnum({ root: 'root', admin: 'admin', guest: 'guest'})
   role?: any
 
+  @ApiPropertyOptional({ required: false, description: '昵称' })
+  nickName?: string
+
+  @ApiPropertyOptional({ required: false, description: '头像' })
+  avatar?: string
+
   @ApiPropertyOptional({ required: false, description: '邮箱' })
   // eslint-disable-next-line @typescript-eslint/camelcase
   @IsEmail({ allow_display_name: true }, { message: '邮箱格式错误' })

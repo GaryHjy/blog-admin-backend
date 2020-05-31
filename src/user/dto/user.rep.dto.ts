@@ -20,12 +20,6 @@ export class UserRep {
   })
   status: number
 
-  @ApiProperty({ 
-    description: '用户权限',
-    enum: ['root', 'admin', 'guest']
-  })
-  role: string;
-
   @ApiProperty({ description: '创建时间' })
   createdAt: Date;
 

@@ -2,12 +2,6 @@ import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, CreateDateColumn,
 import { encodeMD5 } from 'src/utils/encrypt';
 import { Exclude } from 'class-transformer';
 
-enum UserRole {
-  ROOT = 'root',
-  ADMIN = 'admin',
-  GUEST = 'guest',
-}
-
 @Entity()
 export class User {
   @PrimaryGeneratedColumn({
@@ -57,14 +51,6 @@ export class User {
     comment: '用户手机号码',
   })
   mobile: string | null;
-
-  @Column({
-    nullable: false,
-    type: 'enum',
-    enum: UserRole,
-    default: UserRole.GUEST,
-  })
-  role: UserRole;
 
   @Column('tinyint', {
     nullable: true,

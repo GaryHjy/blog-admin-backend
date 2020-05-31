@@ -132,7 +132,7 @@ export class UserService {
    * @memberof UserService
    */
   async updateById(id: number, updateUserDto: UpdateUserDto): Promise<UserRep> {
-    const { username, role, status } = updateUserDto
+    const { username, status } = updateUserDto
     if (username) {
       const result = await this.UserRepository.count({ username });
       if (result) {
@@ -145,7 +145,9 @@ export class UserService {
         )
       } 
     }
-    const { raw: { changedRows } } = await this.UserRepository.update({ id }, { username, role, status })
+    const {
+      raw: { changedRows },
+    } = await this.UserRepository.update({ id }, updateUserDto);
     if (changedRows) {
       return await this.findById(id)
     } else {

@@ -5,15 +5,6 @@ import { Transform } from "class-transformer"
 
 export class UserDto {
 
-  @ApiProperty({
-    required: false,
-    description: '用户角色',
-    enum: ['root', 'admin', 'guest'], // 枚举
-    default: 'guest'
-  })
-  @IsEnum({ root: 'root', admin: 'admin', guest: 'guest'})
-  role?: any
-
   @ApiPropertyOptional({ required: false, description: '昵称' })
   nickName?: string
 

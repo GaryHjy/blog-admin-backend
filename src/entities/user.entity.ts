@@ -34,13 +34,13 @@ export class User {
     comment: '用户昵称',
     length: 64,
   })
-  nickName: string;
+  nickname: string;
 
   @Column('varchar', {
     nullable: true,
     name: 'avatar',
     comment: '头像',
-    length: 255
+    length: 255,
   })
   avatar: string;
 

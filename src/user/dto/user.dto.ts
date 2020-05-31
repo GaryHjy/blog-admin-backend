@@ -6,7 +6,7 @@ import { Transform } from "class-transformer"
 export class UserDto {
 
   @ApiPropertyOptional({ required: false, description: '昵称' })
-  nickName?: string
+  nickname?: string
 
   @ApiPropertyOptional({ required: false, description: '头像' })
   avatar?: string

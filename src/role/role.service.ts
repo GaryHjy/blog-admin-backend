@@ -1,5 +1,5 @@
 import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
-import { RoleEntity } from 'src/entities/role.entity';
+import { Role } from 'src/entities/role.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateRoleDto } from './dto/create.role.dto';
@@ -9,11 +9,11 @@ import { RoleRepDto } from './dto/role.rep.dto';
 @Injectable()
 export class RoleService {
   constructor(
-    @InjectRepository(RoleEntity)
-    private readonly RoleRepository: Repository<RoleEntity>
+    @InjectRepository(Role)
+    private readonly RoleRepository: Repository<Role>
   ) {}
 
-  findAll(): Promise<RoleEntity[]> {
+  findAll(): Promise<Role[]> {
     return this.RoleRepository.find();
   }
 
@@ -56,10 +56,10 @@ export class RoleService {
    * @author GaryHjy
    * @description 根据id查询角色信息
    * @param {number} id
-   * @returns {Promise<RoleEntity>}
+   * @returns {Promise<Role>}
    * @memberof RoleService
    */
-  async findById(id: number):Promise<RoleEntity> {
+  async findById(id: number):Promise<Role> {
     const role = await this.RoleRepository.findOne({id});
     if(role) {
       return role;

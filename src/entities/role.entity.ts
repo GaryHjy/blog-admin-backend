@@ -1,7 +1,7 @@
 import { PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Entity } from "typeorm";
 
 @Entity()
-export class RoleEntity {
+export class Role {
   @PrimaryGeneratedColumn({
     type: 'int',
     name: 'id',

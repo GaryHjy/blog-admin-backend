@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, HttpCode, HttpStatus, Query } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiOperation, ApiOkResponse } from '@nestjs/swagger';
 import { RoleService } from './role.service';
 import { RoleRepDto } from './dto/role.rep.dto';
 import { CreateRoleDto } from './dto/create.role.dto';
 import { UpdateRoleDto } from './dto/update.role.dto';
+import { UserRoleService } from 'src/user-role/user-role.service';
 
 @Controller('role')
 @ApiTags('角色模块')
@@ -11,7 +12,8 @@ import { UpdateRoleDto } from './dto/update.role.dto';
 export class RoleController {
 
   constructor(
-    private readonly roleService: RoleService
+    private readonly roleService: RoleService,
+    private readonly userRoleService: UserRoleService
   ) {}
 
   @Get()
@@ -46,5 +48,10 @@ export class RoleController {
   @HttpCode(HttpStatus.OK)
   async remove(@Param('id') id: number): Promise<boolean> {
     return await this.roleService.removeRoleById(id);
+  }
+
+  @Get('/test/:id')
+  async test(@Param('id') id: number ) {
+    return await this.userRoleService.findUserRoleByIds(id);
   }
 }

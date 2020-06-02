@@ -4,7 +4,6 @@ import { RoleService } from './role.service';
 import { RoleRepDto } from './dto/role.rep.dto';
 import { CreateRoleDto } from './dto/create.role.dto';
 import { UpdateRoleDto } from './dto/update.role.dto';
-import { UserRoleService } from 'src/user-role/user-role.service';
 
 @Controller('role')
 @ApiTags('角色模块')
@@ -12,8 +11,7 @@ import { UserRoleService } from 'src/user-role/user-role.service';
 export class RoleController {
 
   constructor(
-    private readonly roleService: RoleService,
-    private readonly userRoleService: UserRoleService
+    private readonly roleService: RoleService
   ) {}
 
   @Get()
@@ -50,8 +48,4 @@ export class RoleController {
     return await this.roleService.removeRoleById(id);
   }
 
-  @Get('/test/:id')
-  async test(@Param('id') id: number ) {
-    return await this.userRoleService.findUserRoleByIds(id);
-  }
 }

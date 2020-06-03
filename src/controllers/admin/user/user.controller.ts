@@ -4,7 +4,7 @@ import { UserRep } from './dto/user.rep.dto';
 import { CreateUserDto } from './dto/create.user.dto';
 import { UpdateUserDto } from './dto/update.user.dto';
 import { CurrentUser } from 'src/decorators/current.user';
-import { UserService } from 'src/user/user.service';
+import { UserService } from 'src/service/admin/user/user.service';
 
 @Controller('user')
 @ApiTags('用户模块')

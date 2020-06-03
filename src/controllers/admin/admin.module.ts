@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { UserController } from "./user/user.controller";
+import { RoleController } from "./role/role.controller";
 import { ServiceModule } from "src/module/service/service.module";
 
 @Module({
@@ -10,7 +11,8 @@ import { ServiceModule } from "src/module/service/service.module";
     
   ],
   controllers: [
-    UserController
+    UserController,
+    RoleController
   ]
 })
 export class AdminModule {}

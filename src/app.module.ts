@@ -1,13 +1,13 @@
 import * as path from 'path';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import databaseConfig from './config/database.config';
 import globalConfig from './config/global.config';
 import { AuthGuard } from './guard/auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { AdminModule } from './controllers/admin/admin.module';
+import { AuthModule } from './module/auth/auth.module';
 
 // 实体类路径
 const entitiesPath = path.resolve(__dirname + '/*/**/*.entity{.ts,.js}')
@@ -33,8 +33,8 @@ const entitiesPath = path.resolve(__dirname + '/*/**/*.entity{.ts,.js}')
       }),
       inject: [ConfigService], // 注入
     }),
-    AdminModule,
     AuthModule,
+    AdminModule,
   ],
   providers: [{
     provide: APP_GUARD,

@@ -1,6 +1,5 @@
 import * as path from 'path';
 import { Module } from '@nestjs/common';
-import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -8,9 +7,9 @@ import databaseConfig from './config/database.config';
 import globalConfig from './config/global.config';
 import { AuthGuard } from './guard/auth.guard';
 import { APP_GUARD } from '@nestjs/core';
-import { AppController } from './app.controller';
 import { RoleController } from './role/role.controller';
 import { RoleModule } from './role/role.module';
+import { AdminModule } from './controllers/admin/admin.module';
 
 // 实体类路径
 const entitiesPath = path.resolve(__dirname + '/*/**/*.entity{.ts,.js}')
@@ -36,7 +35,7 @@ const entitiesPath = path.resolve(__dirname + '/*/**/*.entity{.ts,.js}')
       }),
       inject: [ConfigService], // 注入
     }),
-    UserModule,
+    AdminModule,
     AuthModule,
     RoleModule,
   ],
@@ -44,6 +43,6 @@ const entitiesPath = path.resolve(__dirname + '/*/**/*.entity{.ts,.js}')
     provide: APP_GUARD,
     useClass: AuthGuard
   }],
-  controllers: [AppController, RoleController],
+  controllers: [RoleController],
 })
 export class AppModule {}

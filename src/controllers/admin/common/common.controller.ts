@@ -1,9 +1,9 @@
 import { Controller, Get, Query, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiOkResponse } from '@nestjs/swagger';
 import { UserService } from 'src/service/admin/user/user.service';
-import { AuthService } from 'src/auth/auth.service';
 import { UserLoginRep } from 'src/controllers/admin/user/dto/user.login.rep.dto';
 import { UserLoginDto } from 'src/controllers/admin/user/dto/user.login.dto';
+import { AuthService } from 'src/service/admin/auth/auth.service';
 
 @Controller()
 @ApiTags('全局')

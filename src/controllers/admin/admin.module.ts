@@ -7,11 +7,8 @@ import { AuthModule } from 'src/module/auth/auth.module';
 
 @Module({
   imports: [
-  ServiceModule,
+    ServiceModule,
     AuthModule
-  ],
-  providers: [
-    
   ],
   controllers: [
     CommonController,

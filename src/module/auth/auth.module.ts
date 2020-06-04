@@ -8,7 +8,6 @@ import { ServiceModule } from 'src/module/service/service.module';
 
 import { AuthService } from 'src/service/admin/auth/auth.service';
 
-
 @Module({
   imports: [
     ServiceModule,

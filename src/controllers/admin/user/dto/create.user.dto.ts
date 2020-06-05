@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger"
-import { IsString, IsNotEmpty } from 'class-validator'
+import { IsString, IsNotEmpty, IsArray } from 'class-validator'
 import { UserDto } from './user.dto';
 
 export class CreateUserDto extends UserDto {
@@ -13,4 +13,7 @@ export class CreateUserDto extends UserDto {
   @IsNotEmpty({ message: '密码不能为空' })
   password: string
 
+  @ApiProperty({ description: '角色id' })
+  @IsArray({ message: 'roleIds必须为数组'})
+  roleIds?: number[]
 }

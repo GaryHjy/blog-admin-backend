@@ -1,10 +1,13 @@
 import { Controller, Get, Post, Body, Param, Put, Delete, HttpStatus, HttpCode } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
+
 import { UserRep } from './dto/user.rep.dto';
 import { CreateUserDto } from './dto/create.user.dto';
 import { UpdateUserDto } from './dto/update.user.dto';
+
 import { CurrentUser } from 'src/decorators/current.user';
 import { UserService } from 'src/service/admin/user/user.service';
+import { UserRoleService } from 'src/service/admin/user-role/user-role.service';
 
 @Controller('user')
 @ApiTags('用户模块')
@@ -12,7 +15,8 @@ import { UserService } from 'src/service/admin/user/user.service';
 export class UserController {
 
   constructor(
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    private readonly userRoleService: UserRoleService
   ) {}
 
   @Get()
@@ -25,7 +29,10 @@ export class UserController {
   @ApiOperation({ summary: '创建用户', description: '创建用户'})
   @ApiOkResponse({ type: UserRep })
   async create(@Body() createUserDto: CreateUserDto): Promise<UserRep> {
-    return await this.userService.create(createUserDto);
+    const { roleIds } = createUserDto;
+    const user = await this.userService.create(createUserDto);
+    const userRoles = await this.userRoleService.create(user.id, roleIds);
+    return user;
   }
 
   @Put(':id')

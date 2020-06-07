@@ -28,7 +28,7 @@ export class UserRoleService {
           }
         })).execute();
       if(affectedRows === roleIds.length) {
-        return await this.findUserRoleById(userId);
+        return roleIds;
       } else {
         throw new HttpException(
           {

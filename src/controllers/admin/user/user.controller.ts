@@ -8,6 +8,7 @@ import { UpdateUserDto } from './dto/update.user.dto';
 import { CurrentUser } from 'src/decorators/current.user';
 import { UserService } from 'src/service/admin/user/user.service';
 import { UserRoleService } from 'src/service/admin/user-role/user-role.service';
+import { RoleService } from 'src/service/admin/role/role.service';
 
 @Controller('user')
 @ApiTags('用户模块')
@@ -16,7 +17,8 @@ export class UserController {
 
   constructor(
     private readonly userService: UserService,
-    private readonly userRoleService: UserRoleService
+    private readonly userRoleService: UserRoleService,
+    private readonly roleService: RoleService
   ) {}
 
   @Get()
@@ -31,8 +33,12 @@ export class UserController {
   async create(@Body() createUserDto: CreateUserDto): Promise<UserRep> {
     const { roleIds } = createUserDto;
     const user = await this.userService.create(createUserDto);
-    const userRoles = await this.userRoleService.create(user.id, roleIds);
-    return user;
+    const successIds = await this.userRoleService.create(user.id, roleIds);
+    const userRoles = await this.roleService.findRoleByIds(successIds);
+    return {
+      ...user,
+      userRoles
+    };
   }
 
   @Put(':id')

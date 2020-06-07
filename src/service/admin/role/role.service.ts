@@ -17,6 +17,11 @@ export class RoleService {
     return this.RoleRepository.find();
   }
 
+  async findRoleByIds(ids: number[]): Promise<Role[]> {
+    return await this.RoleRepository.findByIds(ids);
+  } 
+
+
   /**
    * @author GaryHjy
    * @description 创建角色

@@ -20,6 +20,9 @@ export class UserRep {
   })
   status: number
 
+  @ApiProperty({description: '角色'})
+  userRoles?: object[]
+
   @ApiProperty({ description: '创建时间' })
   createdAt: Date;
 

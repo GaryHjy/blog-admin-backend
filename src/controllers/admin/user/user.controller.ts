@@ -52,7 +52,14 @@ export class UserController {
   @ApiOperation({ summary: '获取用户信息', description: '根据id获取用户信息' })
   @ApiOkResponse({ type: UserRep })
   async detail(@Param('id') id: number): Promise<UserRep> {
-    return await this.userService.findById(id)
+    const user = await this.userService.findById(id);
+    const roleIds = await this.userRoleService.findUserRoleById(id);
+    const ids = roleIds.map(item => item.roleId)
+    const userRoles = await this.roleService.findRoleByIds(ids);
+    return {
+      ...user,
+      userRoles
+    }
   }
 
   @Delete(':id')

@@ -18,6 +18,14 @@ export class UserRoleService {
     });
   }
 
+  /**
+   * @author GaryHjy
+   * @description 创建用户角色关系
+   * @param {number} userId
+   * @param {number[]} roleIds
+   * @returns
+   * @memberof UserRoleService
+   */
   async create(userId: number, roleIds: number[])  {
     if(roleIds.length) {
       const { raw: { affectedRows } }= await this.UserRoleRepository.createQueryBuilder()

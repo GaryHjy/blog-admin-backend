@@ -24,9 +24,9 @@ export class UserRep {
   userRoles?: object[]
 
   @ApiProperty({ description: '创建时间' })
-  createdAt: Date;
+  createdTime: Date;
 
   @ApiProperty({ description: '更新时间' })
-  updatedAt: Date;
+  updatedTime: Date;
 
 }

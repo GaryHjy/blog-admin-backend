@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger"
-import { IsEnum, IsOptional, IsEmail, IsMobilePhone} from 'class-validator'
+import { IsEnum, IsOptional, IsEmail, IsMobilePhone, IsArray} from 'class-validator'
 import { Transform } from "class-transformer"
 
 
@@ -21,6 +21,10 @@ export class UserDto {
   @IsMobilePhone('zh-CN', { message: '手机号码格式错误' })
   @IsOptional()
   readonly mobile?: string;
+
+  @ApiProperty({ description: '角色id' })
+  @IsArray({ message: 'roleIds必须为数组'})
+  roleIds?: number[]
 
   @ApiProperty({ 
     required: false,

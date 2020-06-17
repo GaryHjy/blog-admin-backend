@@ -22,8 +22,9 @@ export class UserDto {
   @IsOptional()
   readonly mobile?: string;
 
-  @ApiProperty({ description: '角色id' })
+  @ApiPropertyOptional({ required: false, description: '角色id' })
   @IsArray({ message: 'roleIds必须为数组'})
+  @IsOptional()
   roleIds?: number[]
 
   @ApiProperty({ 

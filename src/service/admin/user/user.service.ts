@@ -132,6 +132,16 @@ export class UserService {
    * @memberof UserService
    */
   async updateById(id: number, updateUserDto: UpdateUserDto): Promise<UserRep> {
+    const { username } = updateUserDto;
+    if(username) {
+      throw new HttpException(
+        {
+          message: '用户名不能修改',
+          code: 400
+        },
+        HttpStatus.OK,
+      )
+    }
     const {
       raw: { changedRows },
     } = await this.UserRepository.update({ id }, updateUserDto);

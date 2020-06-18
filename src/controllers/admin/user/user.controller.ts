@@ -45,7 +45,8 @@ export class UserController {
   @ApiOperation({ summary: '更新用户信息', description: '根据id更新用户信息'})
   @ApiOkResponse({ type: UserRep })
   async update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto): Promise<UserRep> {
-    return await this.userService.updateById(id, updateUserDto)
+    const { roleIds, ...params } =  updateUserDto;
+    return await this.userService.updateById(id, params)
   }
 
   @Get(':id')

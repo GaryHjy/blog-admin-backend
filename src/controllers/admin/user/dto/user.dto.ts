@@ -2,7 +2,6 @@ import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger"
 import { IsEnum, IsOptional, IsEmail, IsMobilePhone, IsArray} from 'class-validator'
 import { Transform } from "class-transformer"
 
-
 export class UserDto {
 
   @ApiPropertyOptional({ required: false, description: '昵称' })

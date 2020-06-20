@@ -50,4 +50,7 @@ export class UserRoleService {
       return []
     }
   }
+
+  update(userId: number, roleIds: number[]) {
+  }
 }

@@ -53,4 +53,7 @@ export class UserRoleService {
 
   update(userId: number, roleIds: number[]) {
   }
+
+  remove(userId: number) {
+  }
 }

@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, CreateDateColumn,
 import { encodeMD5 } from 'src/utils/encrypt';
 import { Exclude } from 'class-transformer';
 
-@Entity()
+@Entity('user')
 export class User {
   @PrimaryGeneratedColumn({
     type: 'int',

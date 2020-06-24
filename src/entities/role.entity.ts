@@ -52,16 +52,16 @@ export class Role {
   @CreateDateColumn({
     nullable: false,
     type: 'timestamp',
-    name: 'created_at',
+    name: 'created_time',
     comment: '创建时间',
   })
-  createdAt: Date;
+  createdTime: Date;
 
   @UpdateDateColumn({
     nullable: false,
     type: 'timestamp',
-    name: 'updated_at',
+    name: 'updated_time',
     comment: '更新时间',
   })
-  updatedAt: Date;
+  updatedTime: Date;
 }

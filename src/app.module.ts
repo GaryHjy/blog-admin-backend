@@ -10,13 +10,13 @@ import { AdminModule } from './controllers/admin/admin.module';
 import { AuthModule } from './module/auth/auth.module';
 
 // 实体类路径
-const entitiesPath = path.resolve(__dirname + '/*/**/*.entity{.ts,.js}')
+const entitiesPath = path.resolve(__dirname + '/*/**/*.entity{.ts,.js}');
 
 @Module({
   imports: [
     // 配置加载配置文件
     ConfigModule.forRoot({
-      load: [databaseConfig, globalConfig] // 引入配置文件
+      load: [databaseConfig, globalConfig], // 引入配置文件
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule], // 要import, 不然会报错
@@ -36,9 +36,11 @@ const entitiesPath = path.resolve(__dirname + '/*/**/*.entity{.ts,.js}')
     AuthModule,
     AdminModule,
   ],
-  providers: [{
-    provide: APP_GUARD,
-    useClass: AuthGuard
-  }]
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AppModule {}

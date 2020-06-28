@@ -8,6 +8,7 @@ import { Role } from 'src/entities/role.entity';
 import { UserService } from "src/service/admin/user/user.service";
 import { RoleService } from "src/service/admin/role/role.service";
 import { UserRoleService } from "src/service/admin/user-role/user-role.service";
+import { ElementResourceService } from "src/service/admin/element-resource/element-resource.service";
 
 @Module({
   imports: [
@@ -15,17 +16,20 @@ import { UserRoleService } from "src/service/admin/user-role/user-role.service";
       User,
       Role,
       UserRole,
+      ElementResourceService
     ])
   ],
   providers: [
     UserService,
     RoleService,
     UserRoleService,
+    ElementResourceService
   ],
   exports: [
     UserService,
     RoleService,
     UserRoleService,
+    ElementResourceService
   ]
 })
 export class ServiceModule {}

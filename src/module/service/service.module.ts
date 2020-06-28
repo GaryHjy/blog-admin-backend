@@ -4,6 +4,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { User } from "src/entities/user.entity";
 import { UserRole } from "src/entities/user_role.entity";
 import { Role } from 'src/entities/role.entity';
+import { ElementResource } from "src/entities/element_resource.entity";
 
 import { UserService } from "src/service/admin/user/user.service";
 import { RoleService } from "src/service/admin/role/role.service";
@@ -16,7 +17,7 @@ import { ElementResourceService } from "src/service/admin/element-resource/eleme
       User,
       Role,
       UserRole,
-      ElementResourceService
+      ElementResource
     ])
   ],
   providers: [

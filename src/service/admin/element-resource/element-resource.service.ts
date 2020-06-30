@@ -9,4 +9,17 @@ export class ElementResourceService {
     @InjectRepository(ElementResource)
     private readonly ElementResourceRepository: Repository<ElementResource>
   ) {}
+
+  findAll() {
+    
+  }
+
+  create() {
+    
+  }
+
+  update() {
+
+  }
+
 }

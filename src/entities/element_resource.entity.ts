@@ -26,6 +26,14 @@ export class ElementResource {
   })
   code: string;
 
+  @Column('tinyint', {
+    nullable: true,
+    default: () => 1,
+    name: 'type',
+    comment: '元素类型'
+  })
+  type: number
+
   @Column('varchar', {
     nullable: true,
     name: 'icon_url',

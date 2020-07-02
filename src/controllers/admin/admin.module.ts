@@ -4,6 +4,7 @@ import { UserController } from "./user/user.controller";
 import { RoleController } from "./role/role.controller";
 import { ServiceModule } from "src/module/service/service.module";
 import { AuthModule } from 'src/module/auth/auth.module';
+import { ElementResourceController } from './element-resource/element-resource.controller';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { AuthModule } from 'src/module/auth/auth.module';
   controllers: [
     CommonController,
     UserController,
-    RoleController
+    RoleController,
+    ElementResourceController
   ]
 })
 export class AdminModule {}

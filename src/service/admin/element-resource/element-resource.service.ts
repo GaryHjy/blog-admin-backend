@@ -10,8 +10,8 @@ export class ElementResourceService {
     private readonly ElementResourceRepository: Repository<ElementResource>
   ) {}
 
-  findAll() {
-    
+  findAll(): Promise<ElementResource[]> {
+    return this.ElementResourceRepository.find();
   }
 
   create() {

@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { ElementResourceService } from 'src/service/admin/element-resource/element-resource.service';
 
@@ -14,5 +14,10 @@ export class ElementResourceController {
   @ApiOperation({ summary: '获取元素列表', description: '获取元素列表'})
   findAll() {
     return this.elementResourceService.findAll();
+  }
+
+  @Post()
+  create() {
+    
   }
 }

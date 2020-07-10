@@ -14,12 +14,4 @@ export class ElementResourceService {
     return this.ElementResourceRepository.find();
   }
 
-  create() {
-    
-  }
-
-  update() {
-
-  }
-
 }

@@ -10,15 +10,19 @@ export class ElementResourceDto {
   @ApiPropertyOptional({ required: true, description: '头像'})
   code: string
 
-
+  @ApiPropertyOptional({ required: true, description: '元素类型'})
   type: number
 
+  @ApiPropertyOptional({ required: false, description: '元素图标'})
   iconUrl: string
 
+  @ApiPropertyOptional({ required: false, description: '路径url'})
   pathUrl: string
 
+  @ApiPropertyOptional({ required: false, description: '排序'})
   sort: number
 
+  @ApiPropertyOptional({ required: false, description: '描述'})
   description: string
 
   @ApiPropertyOptional({ 
